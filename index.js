@@ -3,13 +3,16 @@ import grid from "./objects/grid";
 import camera from "./objects/camera";
 import scene from "./objects/scene";
 import sun from "./objects/sun";
+import fog from "./objects/fog";
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 scene.add(grid);
 scene.add(sun);
+
+scene.fog = fog;
 
 function render() {
   requestAnimationFrame(render);

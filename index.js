@@ -4,6 +4,9 @@ import camera from "./objects/camera";
 import scene from "./objects/scene";
 import sun from "./objects/sun";
 import fog from "./objects/fog";
+import bloomPass from "./effects/bloomPass";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -14,22 +17,29 @@ scene.add(sun);
 
 scene.fog = fog;
 
+const composer = new EffectComposer(renderer);
+const renderPass = new RenderPass(scene, camera);
+
+composer.addPass(renderPass);
+composer.addPass(bloomPass);
+
+renderer.toneMapping = THREE.LinearToneMapping;
+renderer.toneMappingExposure = 1.2;
+
 function render() {
+  composer.render();
   requestAnimationFrame(render);
-  renderer.render(scene, camera);
 }
 
 window.addEventListener("resize", () => {
-  // update display width and height
-  let width = window.innerWidth;
-  let height = window.innerHeight;
-  // update camera aspect
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  // update renderer
+
   renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.render(scene, camera);
+  composer.setSize(width, height);
 });
 
 render();

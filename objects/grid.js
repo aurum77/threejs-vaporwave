@@ -9,6 +9,8 @@ const grid = new THREE.GridHelper(size, divs, color, color);
 
 grid.name = "vaporwave_grid"
 
+grid.rotation.z = -.01;
+
 setInterval(() => {
   grid.position.x -= .02;
 }, 1);

@@ -12,12 +12,21 @@ scene.add(grid);
 scene.add(sun);
 
 function render() {
+  requestAnimationFrame(render);
   renderer.render(scene, camera);
 }
 
-function animate() {
-  requestAnimationFrame(animate);
-  render();
-}
+window.addEventListener("resize", () => {
+  // update display width and height
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  // update camera aspect
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  // update renderer
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.render(scene, camera);
+});
 
-animate();
+render();

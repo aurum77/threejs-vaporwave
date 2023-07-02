@@ -13,7 +13,10 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+const grid2 = grid.clone();
+
 scene.add(grid);
+scene.add(grid2);
 scene.add(sun);
 
 scene.fog = fog;
@@ -28,7 +31,14 @@ composer.addPass(bloomPass);
 renderer.toneMapping = THREE.LinearToneMapping;
 renderer.toneMappingExposure = 1.2;
 
+const clock = new THREE.Clock();
+
 function render() {
+  const elapsedTime = clock.getElapsedTime();
+
+  grid.position.x = -((elapsedTime * 9.0) % 90) - 40;
+  grid2.position.x = -((elapsedTime * 9.0) % 90) + 410;
+
   composer.render();
   requestAnimationFrame(render);
 }

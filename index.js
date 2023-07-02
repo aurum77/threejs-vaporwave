@@ -5,6 +5,7 @@ import scene from "./objects/scene";
 import sun from "./objects/sun";
 import fog from "./objects/fog";
 import bloomPass from "./effects/bloomPass";
+import rgbShiftPass from "./effects/rgbShiftPass";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 
@@ -21,6 +22,7 @@ const composer = new EffectComposer(renderer);
 const renderPass = new RenderPass(scene, camera);
 
 composer.addPass(renderPass);
+composer.addPass(rgbShiftPass);
 composer.addPass(bloomPass);
 
 renderer.toneMapping = THREE.LinearToneMapping;

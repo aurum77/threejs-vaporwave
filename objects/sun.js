@@ -4,10 +4,10 @@ const geometry = new THREE.SphereGeometry(12, 128, 128);
 
 const material = new THREE.ShaderMaterial({
   uniforms: {
-    color1: {
+    color_bottom: {
       value: new THREE.Color(0xf4634a),
     },
-    color2: {
+    color_top: {
       value: new THREE.Color(0xffd34e),
     },
   },
@@ -20,14 +20,14 @@ const material = new THREE.ShaderMaterial({
     }
   `,
   fragmentShader: `
-    uniform vec3 color1;
-    uniform vec3 color2;
+    uniform vec3 color_bottom;
+    uniform vec3 color_top;
   
     varying vec2 vUv;
     
     void main() {
       
-      gl_FragColor = vec4(mix(color1, color2, vUv.y), 1.0);
+      gl_FragColor = vec4(mix(color_bottom, color_top, vUv.y), 1.0);
     }
   `,
   wireframe: false,

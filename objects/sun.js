@@ -38,4 +38,6 @@ const sun = new THREE.Mesh(geometry, material);
 sun.position.x = -5;
 sun.position.y = 30;
 
+scene.name = "vaporwave_sun";
+
 export default sun;

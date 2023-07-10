@@ -10,4 +10,6 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.set(-90, 4.3, 0);
 camera.lookAt(0, 1, 0);
 
+camera.name = "vaporwave_camera";
+
 export default camera;

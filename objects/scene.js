@@ -5,4 +5,6 @@ const color = new THREE.Color(0x220435);
 
 scene.background = color;
 
+scene.name = "vaporwave_scene";
+
 export default scene;

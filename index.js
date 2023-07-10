@@ -4,6 +4,7 @@ import camera from "./objects/camera";
 import scene from "./objects/scene";
 import sun from "./objects/sun";
 import fog from "./objects/fog";
+import horizon from "./objects/horizon";
 import bloomPass from "./effects/bloomPass";
 import rgbShiftPass from "./effects/rgbShiftPass";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
@@ -18,8 +19,9 @@ const grid2 = grid.clone();
 scene.add(grid);
 scene.add(grid2);
 scene.add(sun);
+scene.add(horizon);
 
-scene.fog = fog;
+// scene.fog = fog;
 
 const composer = new EffectComposer(renderer);
 const renderPass = new RenderPass(scene, camera);
